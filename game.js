@@ -28,7 +28,7 @@ window.onload = () => {
 
     let failHandler = function (e) {
         stateHandler('You Lost, try again');
-        e.target.classList.add('youlose');
+        boundaries.forEach((b) => b.classList.add('youlose'));
         score = score - 10;
         scoreDiv.innerText = `Score: ${score}`
         boundaries.forEach((b) => b.removeEventListener('mouseover', failHandler));
