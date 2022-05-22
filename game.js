@@ -7,9 +7,22 @@ window.onload = () => {
     const end = document.getElementById('end');
     console.log(boundaries);
 
+
     let score = 0
 
     // event handlers
+    let resetHandler = (e) => {
+        //reset maze state, no red boundaries,
+        boundaries.forEach(b => b.classList.remove('youlose'))
+        boundaries.forEach((b) => b.addEventListener('mouseover', failHandler));
+        //reset score
+        score = 0;
+        scoreDiv.innerText = `Score: ${score}`
+        // reset game state
+        status.innerText = 'Move cursor to the end.';
+        end.addEventListener('mouseover', endHandler);
+    }
+
     let startHandler = (e) => {
         //reset maze state, no red boundaries,
         boundaries.forEach(b => b.classList.remove('youlose'))
@@ -18,7 +31,7 @@ window.onload = () => {
         // score = 0;
         scoreDiv.innerText = `Score: ${score}`
         // reset game state
-        status.innerText = 'Begin by moving your mouse over the "S".';
+        status.innerText = 'Move cursor to the end.';
         end.addEventListener('mouseover', endHandler);
     }
 
@@ -48,7 +61,8 @@ window.onload = () => {
         end.removeEventListener('mouseover', endHandler)
 
     }
-    start.addEventListener('click', startHandler);
+    start.addEventListener('click', resetHandler);
+    start.addEventListener('mouseover', startHandler);
     end.addEventListener('mouseover', endHandler)
 
 }
